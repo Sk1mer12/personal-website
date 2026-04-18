@@ -200,7 +200,7 @@ const ProjectsPage = () => {
           <div className="project-body">
             <div className="project-title">Something new, soon</div>
             <p className="project-desc">
-              More vibecoded experiments on the way. Add them by editing <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--fg)', background: 'var(--surface-hi)', padding: '2px 6px', borderRadius: 4 }}>VIBE_PROJECTS</code> in src/data.jsx.
+              More vibecoded experiments on the way.
             </p>
             <div className="project-tags">
               <span className="tag">TBD</span>
