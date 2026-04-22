@@ -55,7 +55,7 @@ const HomePage = ({ tweaks, onNav }) => {
 
       <LatestActivity />
 
-      <section className="section">
+      <section className="section focused-on-section">
         <div className="section-head">
           <h2>Currently focused on</h2>
           <span className="meta">Balancer · DeFi Lead</span>
@@ -133,7 +133,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section early-builder-section">
         <div className="section-head">
           <h2>Early builder work</h2>
           <span className="meta">Pre-Balancer</span>
@@ -199,9 +199,7 @@ const ProjectsPage = () => {
           </div>
           <div className="project-body">
             <div className="project-title">Something new, soon</div>
-            <p className="project-desc">
-              More vibecoded experiments on the way.
-            </p>
+            <p className="project-desc">More vibecoded experiments on the way.</p>
             <div className="project-tags">
               <span className="tag">TBD</span>
             </div>

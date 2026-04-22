@@ -32,37 +32,85 @@ const Icon = ({ name, size = 16 }) => {
   }
 };
 
-const Nav = ({ current, onNav, theme, onToggleTheme, onToggleTweaks }) => {
+const Nav = ({ current, onNav, theme, onToggleTheme }) => {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
   const links = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
-    // { id: 'testimonials', label: 'Feedback' }, // Hidden for now — code kept in src/testimonials.jsx + data.jsx
     { id: 'contact', label: 'Contact' },
   ];
+
+  const handleNav = (id) => { onNav(id); setMenuOpen(false); };
+
+  React.useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   return (
-    <nav className="nav">
-      <div className="nav-inner">
-        <a href="#home" className="logo" onClick={(e) => { e.preventDefault(); onNav('home'); }}>
-          <span className="logo-dot" />
-          <span>Simão<em style={{ fontStyle: 'normal', color: 'var(--accent)', marginLeft: 6 }}>Pinto</em></span>
-        </a>
-        <div className="nav-links">
-          {links.map(l => (
-            <a key={l.id} href={`#${l.id}`}
-              className={`nav-link ${current === l.id ? 'active' : ''}`}
-              onClick={(e) => { e.preventDefault(); onNav(l.id); }}>
-              {l.label}
-            </a>
-          ))}
+    <>
+      <nav className="nav">
+        <div className="nav-inner">
+          <a href="#home" className="logo" onClick={(e) => { e.preventDefault(); handleNav('home'); }}>
+            <span className="logo-dot" />
+            <span>Simão<em style={{ fontStyle: 'normal', color: 'var(--accent)', marginLeft: 6 }}>Pinto</em></span>
+          </a>
+          <div className="nav-links">
+            {links.map(l => (
+              <a key={l.id} href={`#${l.id}`}
+                className={`nav-link ${current === l.id ? 'active' : ''}`}
+                onClick={(e) => { e.preventDefault(); handleNav(l.id); }}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+          <div className="nav-actions">
+            <button className="icon-btn" onClick={onToggleTheme} title="Toggle theme">
+              <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={16} />
+            </button>
+            <button className="icon-btn nav-hamburger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+          </div>
         </div>
-        <div className="nav-actions">
-          <button className="icon-btn" onClick={onToggleTheme} title="Toggle theme">
-            <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={16} />
-          </button>
+      </nav>
+
+      {menuOpen && (
+        <div className="mobile-nav-overlay" onClick={() => setMenuOpen(false)}>
+          <div className="mobile-nav-panel" onClick={e => e.stopPropagation()}>
+            <div className="mobile-nav-header">
+              <span className="logo">
+                <span className="logo-dot" />
+                <span>Simão<em style={{ fontStyle: 'normal', color: 'var(--accent)', marginLeft: 6 }}>Pinto</em></span>
+              </span>
+              <button className="icon-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+                <Icon name="close" size={16} />
+              </button>
+            </div>
+            <nav className="mobile-nav-links">
+              {links.map(l => (
+                <a key={l.id} href={`#${l.id}`}
+                  className={`mobile-nav-link ${current === l.id ? 'active' : ''}`}
+                  onClick={(e) => { e.preventDefault(); handleNav(l.id); }}>
+                  <span>{l.label}</span>
+                  <Icon name="arrow-right" size={18} />
+                </a>
+              ))}
+            </nav>
+            <div className="mobile-nav-footer">
+              <button className="mobile-theme-btn" onClick={onToggleTheme}>
+                <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={16} />
+                {theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
 };
 

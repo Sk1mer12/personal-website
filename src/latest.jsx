@@ -104,10 +104,6 @@ const LatestActivity = () => {
           <div className="post-meta">{li.timeAgo} · Open on LinkedIn</div>
         </a>
       </div>
-      <p style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--fg-mute)', marginTop: 16, letterSpacing: '0.04em', lineHeight: 1.6 }}>
-        * X feed auto-fetches via public RSS bridge — if instances are down, falls back to curated post.
-        LinkedIn has no public feed; update the latest post manually in <span style={{ color: 'var(--fg-dim)' }}>src/data.jsx → LATEST_POSTS.linkedin</span> (include the specific post URL so clicks deep-link correctly).
-      </p>
     </section>
   );
 };
