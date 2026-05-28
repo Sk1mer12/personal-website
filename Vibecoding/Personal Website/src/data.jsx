@@ -85,6 +85,13 @@ const VIBE_PROJECTS = [
     tags: ['Next.js', 'Web3', 'Vercel'],
     status: 'Live',
   },
+  {
+    name: 'Peptides Database',
+    desc: 'Educational peptide reference database covering 102 compounds. Browse mechanisms, dosing, and research notes with fast fuzzy search across the catalog.',
+    url: 'https://peptide-db-sigma.vercel.app',
+    tags: ['Next.js', 'MDX', 'Fuse.js'],
+    status: 'Live',
+  },
 ];
 
 const CONTACTS = [
